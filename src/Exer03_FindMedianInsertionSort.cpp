@@ -5,15 +5,38 @@ using namespace std;
 
 class Solution {
 public:
-    // TODO: Sort array using Insertion Sort and return the median at index floor((N-1)/2)
     int findMedian(vector<int>& nums) {
-        // Implementation goes here
-        return 0;
+        int n = nums.size();
+
+        if (n == 0) {
+            return 0;
+        }
+
+        for (int i = 1; i < n; i++) {
+            int chave = nums[i];
+            int j = i - 1;
+
+            while (j >= 0 && nums[j] > chave) {
+                nums[j + 1] = nums[j];
+                j--;
+            }
+
+            nums[j + 1] = chave;
+        }
+
+        int indiceMediana = (n - 1) / 2;
+        return nums[indiceMediana];
     }
 };
 
 int main() {
-    // TODO: Instantiate Solution and test with sample vectors
+    Solution sol;
+
+    vector<int> nums1 = {99, 2, 51, 1, 8};
+    cout << sol.findMedian(nums1) << endl;
+
+    vector<int> nums2 = {70, 10, 30, 50};
+    cout << sol.findMedian(nums2) << endl;
 
     return 0;
 }
